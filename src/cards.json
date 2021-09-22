@@ -1,4 +1,6 @@
 [
 	{ "text": ["Hi!", "It's Sawyer & Denise.", "We have news."] },
-	{ "text": ["We're getting married!"], "confetti": true }
+	{ "text": ["We're getting married!"], "confetti": true },
+	{ "text": ["At this point, you know if you're invited to the (very small!) ceremony."] },
+	{ "text": ["We will be having a small afterparty at an AirBNB.", "Costumes encouraged!"] }
 ]
