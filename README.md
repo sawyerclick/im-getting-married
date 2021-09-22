@@ -1,5 +1,5 @@
-# I'm getting married!
-🎉🎉🎉 Congrats!! ...care to tell me more?
+# 🎉🎉🎉 I'm getting married! 🎉🎉🎉
+Congrats!! ...care to tell me more?
 
 [Sawyer Click](https://www.twitter.com/sawyerdabear) (me!!) and [Denise Cervantes](https://www.twitter.com/cervantesdenise) are getting <em>married</em>!! on <b style='color:DarkOrange'>🎃👻🎃Halloween 2021🎃👻🎃</b> at Sekrit Theatre in Austin, Texas! After party to be hosted at an AirBNB. More details TK!
 
