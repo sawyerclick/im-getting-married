@@ -1,6 +1,21 @@
 [
-	{ "text": ["Hi!", "It's Sawyer & Denise.", "We have news."] },
-	{ "text": ["We're getting married!"], "confetti": true },
+	{ "text": ["Hi!", "It's Sawyer & Denise.", "We have news!"] },
+	{ "text": ["We're getting married!"], "special": ["confetti"] },
 	{ "text": ["At this point, you know if you're invited to the (very small!) ceremony."] },
-	{ "text": ["We will be having a small afterparty at an AirBNB.", "Costumes encouraged!"] }
+	{
+		"text": ["October 31, 2021", "5:30 p.m. - 6:30 p.m.", "Sekrit Theater, Austin, TX"],
+		"special": ["sekrit-theater"]
+	},
+	{
+		"text": [
+			"But!",
+			"There will be a small afterparty at an Airbnb.",
+			"You are invited.",
+			"Costumes encouraged!"
+		],
+		"special": ["airbnb"]
+	},
+	{
+		"special": ["summary"]
+	}
 ]

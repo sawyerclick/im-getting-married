@@ -14,14 +14,14 @@
 				particleCount: 200,
 				angle: 60,
 				spread: 55,
-				origin: { x: 0 },
+				origin: { x: 0, y: 1 },
 				colors: colors
 			});
 			canvas.confetti({
 				particleCount: 200,
 				angle: 120,
 				spread: 55,
-				origin: { x: 1 },
+				origin: { x: 1, y: 1 },
 				colors: colors
 			});
 		};
@@ -31,4 +31,4 @@
 	});
 </script>
 
-<canvas class="absolute w-full h-full z-50" bind:this={canvas} />
+<canvas class="absolute w-full h-full z-50 pointer-events-none" bind:this={canvas} aria-hidden />
