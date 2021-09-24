@@ -8,7 +8,7 @@
 	import SekritTheater from '$lib/SekritTheater.svelte';
 	import Airbnb from '$lib/Airbnb.svelte';
 	import Confetti from '$lib/Confetti.svelte';
-	import Summary from '$lib/Summary.svelte';
+	import End from '$lib/End.svelte';
 	import cards from '../cards.json';
 	import { step } from '../stores';
 
@@ -16,26 +16,36 @@
 		['confetti', Confetti],
 		['sekrit-theater', SekritTheater],
 		['airbnb', Airbnb],
-		['summary', Summary]
+		['end', End]
 	]);
 
-	$: timeout = null;
-	const advanceCard = () => {
-		clearTimeout(timeout);
-		if ($step < length) timeout = setTimeout(() => step.set($step + 1), 1000);
+	const config = {
+		delay: 600,
+		timer: null,
+		length: cards.length - 1,
+		cards
 	};
 
-	const length = cards.length - 1;
-	setContext('stuff', {
-		length,
-		cards
+	setContext('stuff', config);
+
+	const advance = () => {
+		if ($step < config.length) clearTimeout(config.timer);
+		config.timer = setTimeout(() => {
+			step.set($step + 1);
+		}, 1000);
+	};
+
+	const restart = () => {
+		clearTimeout(config.timer);
+		step.set(0);
+	};
+
+	onMount(() => {
+		mounted = true;
 	});
 
 	$: activeCard = cards[$step];
 	$: mounted = false;
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 {#if mounted}
@@ -51,17 +61,17 @@
 		<Progress />
 
 		<div class="fixed top-4 left-2 w-4 h-4">
-			<Restart />
+			<Restart on:click={restart} />
 		</div>
 
 		{#if activeCard.text}
-			<article class="p-4">
+			<article class="p-4 ">
 				<Typewriter
 					interval={85}
 					cascade
 					cursor={false}
-					delay={$step > 0 ? 400 : 0}
-					on:done={advanceCard}
+					delay={$step ? config.delay : 0}
+					on:done={advance}
 				>
 					{#each activeCard.text as line}
 						<h1>{@html line}</h1>
@@ -69,27 +79,5 @@
 				</Typewriter>
 			</article>
 		{/if}
-
-		<button
-			class="ctrl left-2"
-			on:click={() => {
-				step.set($step - 1);
-				clearTimeout(timeout);
-			}}
-			hidden={!$step}
-		>
-			previous
-		</button>
-
-		<button
-			class="ctrl right-2"
-			on:click={() => {
-				step.set($step + 1);
-				clearTimeout(timeout);
-			}}
-			hidden={$step == cards.length - 1}
-		>
-			next
-		</button>
 	</main>
 {/if}

@@ -1,9 +1,8 @@
 <script>
 	import { step } from '../stores';
-	const restart = () => step.set(0);
 </script>
 
-<button class="transition-all" on:click={restart} disabled={$step == 0}>
+<button class="transition-all" on:click disabled={$step == 0}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="100%"

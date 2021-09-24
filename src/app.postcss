@@ -3,29 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
-  overflow: hidden;
-  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🦴</text></svg>") 16 0,auto;
+body,
+html {
+	overflow: hidden;
+	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>🦴</text></svg>")
+			16 0,
+		auto;
 }
 
 h1 {
-	@apply font-serif text-5xl mt-4 max-w-md;
+	@apply font-serif text-4xl m-auto mt-4 max-w-md;
 }
 
 p {
-  @apply font-mono;
+	@apply font-mono;
 }
 
 button:not(:disabled) {
-  will-change: transform;
-  @apply transition hover:scale-125 hover:text-purple-700;
+	will-change: transform;
+	@apply transition hover:scale-125 hover:text-purple-700;
 }
 
 button.ctrl {
-  @apply fixed bottom-2 font-serif uppercase leading-none;
+	@apply fixed bottom-2 font-serif uppercase leading-none;
 }
 
 button:disabled {
-  cursor: not-allowed;
-  opacity: .4;
+	cursor: not-allowed;
+	opacity: 0.4;
 }

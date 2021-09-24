@@ -3,7 +3,7 @@
 	{ "text": ["We're getting married!"], "special": ["confetti"] },
 	{ "text": ["At this point, you know if you're invited to the (very small!) ceremony."] },
 	{
-		"text": ["October 31, 2021", "5:30 p.m. - 6:30 p.m.", "Sekrit Theater, Austin, TX"],
+		"text": ["October 31, 2021", "5:30 p.m. to 6:30 p.m.", "Sekrit Theater, Austin, TX"],
 		"special": ["sekrit-theater"]
 	},
 	{
@@ -16,6 +16,6 @@
 		"special": ["airbnb"]
 	},
 	{
-		"special": ["summary"]
+		"special": ["end"]
 	}
 ]

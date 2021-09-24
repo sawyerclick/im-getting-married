@@ -17,13 +17,13 @@
  * © 2021 MyFonts Inc
 */
 
-
 /* @import must be at top of file, otherwise CSS will not work */
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap');
 
-@import url("//hello.myfonts.net/count/3daa84");
+@import url('//hello.myfonts.net/count/3daa84');
 
 @font-face {
-  font-family: "recoleta";
-  src: url('/fonts/RecoletaRegular/font.woff2') format('woff2'), url('fonts/RecoletaRegular/font.woff') format('woff');
+	font-family: 'recoleta';
+	src: url('/fonts/RecoletaRegular/font.woff2') format('woff2'),
+		url('fonts/RecoletaRegular/font.woff') format('woff');
 }
