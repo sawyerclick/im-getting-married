@@ -2,7 +2,7 @@
 	import Restart from '$lib/Restart.svelte';
 	import Airbnb from './Airbnb.svelte';
 	import SekritTheater from './SekritTheater.svelte';
-	import { step } from '../stores';
+	import { step } from '$stores';
 
 	const restart = () => step.set(0);
 </script>

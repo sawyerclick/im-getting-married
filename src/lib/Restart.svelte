@@ -1,5 +1,5 @@
 <script>
-	import { step } from '../stores';
+	import { step } from '$stores';
 </script>
 
 <button

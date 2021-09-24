@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from 'svelte';
-	import { step } from '../stores';
+	import { step } from '$stores';
 	import { fly } from 'svelte/transition';
 	export let link, text;
 
