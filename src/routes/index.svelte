@@ -4,7 +4,7 @@
 	import '../font.css';
 	import Typewriter from 'svelte-typewriter';
 	import Progress from '$lib/Progress.svelte';
-	import Restart from '$lib/Restart.svelte';
+
 	import SekritTheater from '$lib/SekritTheater.svelte';
 	import Airbnb from '$lib/Airbnb.svelte';
 	import Confetti from '$lib/Confetti.svelte';
@@ -35,11 +35,6 @@
 		}, 1000);
 	};
 
-	const restart = () => {
-		clearTimeout(config.timer);
-		step.set(0);
-	};
-
 	onMount(() => {
 		mounted = true;
 	});
@@ -50,7 +45,7 @@
 
 {#if mounted}
 	<main
-		class="flex items-center justify-center h-full w-full min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 text-center"
+		class="flex items-center justify-center h-full w-full min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-center"
 	>
 		{#if activeCard.special}
 			{#each activeCard.special as special}
@@ -59,10 +54,6 @@
 		{/if}
 
 		<Progress />
-
-		<div class="fixed top-4 left-2 w-4 h-4">
-			<Restart on:click={restart} />
-		</div>
 
 		{#if activeCard.text}
 			<article class="p-4 ">

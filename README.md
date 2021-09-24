@@ -1,4 +1,4 @@
-# 🎉🎉🎉 I'm getting married! 🎉🎉🎉
+# 🎉🎉🎉 [I'm getting married!](https://married.sawyer.codes) 🎉🎉🎉
 
 Congrats!! ...care to tell me more?
 
