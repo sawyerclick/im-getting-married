@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-	import { step } from '$stores';
 
 	const progress = tweened(0, {
 		duration: 400,
@@ -10,6 +9,7 @@
 	});
 
 	const { length } = getContext('stuff');
+	const step = getContext('step');
 
 	$: $step, progress.set($step);
 	$: pct = ($progress / length) * 100;

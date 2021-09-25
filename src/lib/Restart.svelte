@@ -1,11 +1,14 @@
 <script>
-	import { step } from '$stores';
+	import { fly } from 'svelte/transition';
+	import { getContext } from 'svelte';
+	const step = getContext('step');
 </script>
 
 <button
-	class="transition-all font-mono text-xl flex justify-center items-center"
+	transition:fly={{ y: 100 }}
+	class="transition-all font-mono text-xl flex justify-center items-center mx-auto"
 	on:click
-	disabled={$step == 0}
+	disabled={$step === 0}
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

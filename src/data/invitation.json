@@ -2,7 +2,7 @@
 	{
 		"lang": "english",
 		"title": "spanish of denise and sawyer are getting married",
-		"body": [
+		"cards": [
 			{ "text": ["Hi!", "It's Sawyer & Denise.", "We have news!"] },
 			{ "text": ["We're getting married!"], "special": ["confetti"] },
 			{ "text": ["At this point, you know if you're invited to the (very small!) ceremony."] },
@@ -27,7 +27,7 @@
 	{
 		"lang": "espanol",
 		"title": "spanish of denise and sawyer are getting married",
-		"body": [
+		"cards": [
 			{ "text": ["Hola!", "It's Sawyer & Denise.", "We have news!"] },
 			{ "text": ["We're getting married!"], "special": ["confetti"] },
 			{ "text": ["At this point, you know if you're invited to the (very small!) ceremony."] },

@@ -1,10 +1,17 @@
 /** @type {import('@sveltejs/kit').Config} */
 import path from "path";
 import autoprefixer from "autoprefixer";
-import preprocess from 'svelte-preprocess';
+import sveltePreprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-netlify';
 
+const preprocess = sveltePreprocess({
+	postcss: {
+		plugins: [autoprefixer]
+	}
+})
+
 const config = {
+	preprocess,
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
@@ -20,12 +27,6 @@ const config = {
 			}
 		}
 	},
-
-	preprocess: [
-		preprocess({
-			postcss: true
-		})
-	]
 };
 
 export default config;
