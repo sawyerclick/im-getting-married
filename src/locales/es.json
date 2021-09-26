@@ -1,20 +1,18 @@
 {
 	"invitation": {
-		"title": "spanish of denise and sawyer are getting married",
+		"title": "¡Denise y Sawyer se van a casar!",
 		"cards": [
-			{ "text": ["Hola!", "It's Sawyer & Denise.", "We have news!"] },
-			{ "text": ["We're getting married!"], "special": ["confetti"] },
-			{ "text": ["At this point, you know if you're invited to the (very small!) ceremony."] },
+			{ "text": ["¡Hola!", "Es Sawyer & Denise.", "¡Tenemos noticias!"] },
+			{ "text": ["¡Nos vamos a casar!"], "special": ["confetti"] },
+			{ "text": ["Ya sabes si estás invitado a la ceremonia."] },
 			{
-				"text": ["October 31, 2021", "5:30 p.m. to 6:30 p.m.", "Sekrit Theater, Austin, TX"],
+				"text": ["Octubre 31, 2021", "5:30 p.m. - 6:30 p.m.", "Sekrit Theater, Austin, TX"],
 				"special": ["sekrit-theater"]
 			},
 			{
 				"text": [
-					"But!",
-					"There will be a small afterparty at an Airbnb.",
-					"You are invited.",
-					"Costumes encouraged!"
+					"Va a ver una pequeña fiesta en un Airbnb.",
+					"Estás invitado."
 				],
 				"special": ["airbnb"]
 			},

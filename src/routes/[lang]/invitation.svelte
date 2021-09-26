@@ -48,6 +48,16 @@
 		$step = 0;
 	});
 
+	let timer;
+	const advanceCard = () => {
+		if ($step < config.length) {
+			clearTimeout(timer);
+			timer = setTimeout(() => {
+				$step = $step + 1;
+			}, 1000);
+		}
+	};
+
 	$: activeCard = cards[$step];
 	$: mounted = false;
 </script>
@@ -79,25 +89,18 @@
 
 		{#if activeCard.text}
 			<article class="p-4 ">
-				<Typewriter interval={85} cascade cursor={false} delay={$step ? config.delay : 0}>
+				<Typewriter
+					interval={85}
+					cascade
+					cursor={false}
+					delay={$step ? config.delay : 0}
+					on:done={advanceCard}
+				>
 					{#each activeCard.text as line}
 						<h1>{@html line}</h1>
 					{/each}
 				</Typewriter>
 			</article>
 		{/if}
-
-		<section class="absolute w-full flex justify-between bottom-2 text-4xl px-4 ">
-			<button
-				on:click={() => ($step = $step - 1)}
-				class:invisible={$step === 0}
-				aria-hidden={$step === 0}>👈</button
-			>
-			<button
-				on:click={() => ($step = $step + 1)}
-				class:invisible={$step === config.length}
-				aria-hidden={$step === config.length}>👉</button
-			>
-		</section>
 	</main>
 {/if}
