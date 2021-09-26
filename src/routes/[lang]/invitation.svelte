@@ -16,7 +16,7 @@
 </script>
 
 <script>
-	import { setContext, onMount } from 'svelte';
+	import { setContext, onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Typewriter from 'svelte-typewriter';
 	import Progress from '$lib/Progress.svelte';
@@ -43,32 +43,29 @@
 	};
 	setContext('stuff', config);
 
-	onMount(() => {
-		mounted = true;
-		clearTimeout(timer);
-		$step = 0;
-	});
-
-	let timer;
 	const advanceCard = () => {
-		clearTimeout(timer);
 		if ($step < config.length) {
 			timer = setTimeout(() => {
 				$step = $step + 1;
+				clearTimeout(timer);
 			}, 1000);
 		}
 	};
 
-	const resetCard = () => {
-		clearTimeout(timer);
-		$step = 0;
-	};
+	const mount = () => (mounted = true);
+	onMount(mount);
 
+	$: timer = null;
 	$: activeCard = cards[$step];
 	$: mounted = false;
 
 	// reset vars on lang change
-	$: lang, resetCard;
+	const reset = () => {
+		$step = 0;
+		activeCard = cards[0];
+		clearTimeout(timer);
+	};
+	$: lang, reset();
 </script>
 
 <svelte:head>
