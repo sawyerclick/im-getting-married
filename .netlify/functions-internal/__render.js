@@ -1549,7 +1549,7 @@ function lowercase_keys(obj) {
   }
   return clone2;
 }
-function error$1(body) {
+function error(body) {
   return {
     status: 500,
     body,
@@ -1578,14 +1578,14 @@ async function render_endpoint(request, route, match) {
     return;
   }
   if (typeof response !== "object") {
-    return error$1(`${preface}: expected an object, got ${typeof response}`);
+    return error(`${preface}: expected an object, got ${typeof response}`);
   }
   let { status = 200, body, headers = {} } = response;
   headers = lowercase_keys(headers);
   const type = get_single_valued_header(headers, "content-type");
   const is_type_textual = is_content_type_textual(type);
   if (!is_type_textual && !(body instanceof Uint8Array || is_string(body))) {
-    return error$1(`${preface}: body must be an instance of string or Uint8Array if content-type is not a supported textual content-type`);
+    return error(`${preface}: body must be an instance of string or Uint8Array if content-type is not a supported textual content-type`);
   }
   let normalized_body;
   if ((typeof body === "object" || typeof body === "undefined") && !(body instanceof Uint8Array) && (!type || type.startsWith("application/json"))) {
@@ -2988,302 +2988,12 @@ function set_paths(paths) {
 }
 function set_prerendering(value) {
 }
-var user_hooks = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module"
-});
-var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="UTF-8" />\n		<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n\n		<title>Denise & Sawyer are getting married!</title>\n		<meta\n			name="description"\n			content="We are getting married Halloween 2021 in Austin, Texas. You are invited to the afterparty!"\n		/>\n		<meta property="og:type" content="article" />\n		<meta property="og:url" content="https://married.sawyer.codes" />\n		<meta property="og:description" content="{meta.MetaDescription}" />\n		<meta property="og:title" content="Denise & Sawyer are getting married!" />\n		<meta property="og:image" content="{meta.Image}" />\n\n		<meta name="twitter:image" content="{meta.Image}" />\n		<meta name="twitter:card" content="summary_large_image" />\n		<meta name="twitter:site" content="https://married.sawyer.codes" />\n		<meta name="twitter:title" content="Denise & Sawyer are getting married!" />\n		<meta name="twitter:description" content="{meta.MetaDescription}" />\n\n		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />\n		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />\n		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />\n		<link rel="manifest" href="/site.webmanifest" />\n		<link rel="icon" href="/favicon.ico" />\n		' + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
-var options = null;
-var default_settings = { paths: { "base": "", "assets": "" } };
-function init(settings = default_settings) {
-  set_paths(settings.paths);
-  set_prerendering(settings.prerendering || false);
-  const hooks = get_hooks(user_hooks);
-  options = {
-    amp: false,
-    dev: false,
-    entry: {
-      file: assets + "/_app/start-481d5b66.js",
-      css: [assets + "/_app/assets/start-e8cdb125.css", assets + "/_app/assets/vendor-2bedf613.css"],
-      js: [assets + "/_app/start-481d5b66.js", assets + "/_app/chunks/vendor-3d727818.js"]
-    },
-    fetched: void 0,
-    floc: false,
-    get_component_path: (id) => assets + "/_app/" + entry_lookup[id],
-    get_stack: (error2) => String(error2),
-    handle_error: (error2, request) => {
-      hooks.handleError({ error: error2, request });
-      error2.stack = options.get_stack(error2);
-    },
-    hooks,
-    hydrate: true,
-    initiator: void 0,
-    load_component,
-    manifest,
-    paths: settings.paths,
-    prerender: true,
-    read: settings.read,
-    root: Root,
-    service_worker: null,
-    router: true,
-    ssr: true,
-    target: "#svelte",
-    template,
-    trailing_slash: "never"
-  };
-}
-var d = (s2) => s2.replace(/%23/g, "#").replace(/%3[Bb]/g, ";").replace(/%2[Cc]/g, ",").replace(/%2[Ff]/g, "/").replace(/%3[Ff]/g, "?").replace(/%3[Aa]/g, ":").replace(/%40/g, "@").replace(/%26/g, "&").replace(/%3[Dd]/g, "=").replace(/%2[Bb]/g, "+").replace(/%24/g, "$");
-var empty = () => ({});
-var manifest = {
-  assets: [{ "file": ".DS_Store", "size": 6148, "type": null }, { "file": "about.txt", "size": 378, "type": "text/plain" }, { "file": "android-chrome-192x192.png", "size": 8639, "type": "image/png" }, { "file": "android-chrome-512x512.png", "size": 28591, "type": "image/png" }, { "file": "apple-touch-icon.png", "size": 8420, "type": "image/png" }, { "file": "favicon-16x16.png", "size": 485, "type": "image/png" }, { "file": "favicon-32x32.png", "size": 935, "type": "image/png" }, { "file": "favicon.ico", "size": 15406, "type": "image/vnd.microsoft.icon" }, { "file": "fonts/.DS_Store", "size": 6148, "type": null }, { "file": "fonts/Inconsolata/.DS_Store", "size": 6148, "type": null }, { "file": "fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf", "size": 343368, "type": "font/ttf" }, { "file": "fonts/Inconsolata/OFL.txt", "size": 4443, "type": "text/plain" }, { "file": "fonts/Inconsolata/README.txt", "size": 6991, "type": "text/plain" }, { "file": "fonts/Inconsolata/static/.DS_Store", "size": 10244, "type": null }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Black.ttf", "size": 98048, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Bold.ttf", "size": 98260, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-ExtraBold.ttf", "size": 98268, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-ExtraLight.ttf", "size": 98108, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Light.ttf", "size": 97956, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Medium.ttf", "size": 98304, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Regular.ttf", "size": 97864, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-SemiBold.ttf", "size": 98400, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Black.ttf", "size": 98408, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Bold.ttf", "size": 98300, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-ExtraBold.ttf", "size": 98328, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-ExtraLight.ttf", "size": 98128, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Light.ttf", "size": 98184, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Medium.ttf", "size": 98196, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Regular.ttf", "size": 97916, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-SemiBold.ttf", "size": 98268, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Black.ttf", "size": 98796, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Bold.ttf", "size": 98764, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-ExtraBold.ttf", "size": 98772, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-ExtraLight.ttf", "size": 98960, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Light.ttf", "size": 98756, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Medium.ttf", "size": 98832, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Regular.ttf", "size": 98540, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-SemiBold.ttf", "size": 98836, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Black.ttf", "size": 98244, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Bold.ttf", "size": 98104, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-ExtraBold.ttf", "size": 98240, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-ExtraLight.ttf", "size": 98088, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Light.ttf", "size": 98048, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Medium.ttf", "size": 98052, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Regular.ttf", "size": 97840, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-SemiBold.ttf", "size": 98152, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Black.ttf", "size": 99280, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Bold.ttf", "size": 99188, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-ExtraBold.ttf", "size": 99252, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-ExtraLight.ttf", "size": 99444, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Light.ttf", "size": 99280, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Medium.ttf", "size": 99152, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Regular.ttf", "size": 98980, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-SemiBold.ttf", "size": 99244, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Black.ttf", "size": 98440, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Bold.ttf", "size": 98348, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-ExtraBold.ttf", "size": 98516, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-ExtraLight.ttf", "size": 98396, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Light.ttf", "size": 98384, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Medium.ttf", "size": 98252, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Regular.ttf", "size": 98064, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-SemiBold.ttf", "size": 98456, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Black.ttf", "size": 98760, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Bold.ttf", "size": 98740, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-ExtraBold.ttf", "size": 98828, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-ExtraLight.ttf", "size": 98736, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Light.ttf", "size": 98476, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Medium.ttf", "size": 98636, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Regular.ttf", "size": 98292, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-SemiBold.ttf", "size": 98740, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Black.ttf", "size": 97848, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Bold.ttf", "size": 97800, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-ExtraBold.ttf", "size": 97848, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-ExtraLight.ttf", "size": 97944, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Light.ttf", "size": 97840, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Medium.ttf", "size": 97832, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Regular.ttf", "size": 97768, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-SemiBold.ttf", "size": 97848, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Black.ttf", "size": 99436, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Bold.ttf", "size": 99444, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-ExtraBold.ttf", "size": 99484, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-ExtraLight.ttf", "size": 99664, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Light.ttf", "size": 99576, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Medium.ttf", "size": 99500, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Regular.ttf", "size": 99428, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-SemiBold.ttf", "size": 99504, "type": "font/ttf" }, { "file": "fonts/RecoletaRegular/font.woff", "size": 52235, "type": "font/woff" }, { "file": "fonts/RecoletaRegular/font.woff2", "size": 49244, "type": "font/woff2" }, { "file": "site.webmanifest", "size": 305, "type": "application/manifest+json" }],
-  layout: "src/routes/__layout.svelte",
-  error: ".svelte-kit/build/components/error.svelte",
-  routes: [
-    {
-      type: "page",
-      pattern: /^\/$/,
-      params: empty,
-      a: ["src/routes/__layout.svelte", "src/routes/index.svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
-      type: "page",
-      pattern: /^\/invitation\/([^/]+?)\/?$/,
-      params: (m) => ({ lang: d(m[1]) }),
-      a: ["src/routes/__layout.svelte", "src/routes/invitation/[lang].svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
-      type: "page",
-      pattern: /^\/gallery\/?$/,
-      params: empty,
-      a: ["src/routes/__layout.svelte", "src/routes/gallery/index.svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
-      type: "page",
-      pattern: /^\/gallery\/([^/]+?)\/?$/,
-      params: (m) => ({ name: d(m[1]) }),
-      a: ["src/routes/__layout.svelte", "src/routes/gallery/[name].svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
-      type: "endpoint",
-      pattern: /^\/api\/invitation\/([^/]+?)\.json$/,
-      params: (m) => ({ lang: d(m[1]) }),
-      load: () => Promise.resolve().then(function() {
-        return _lang__json;
-      })
-    },
-    {
-      type: "endpoint",
-      pattern: /^\/api\/gallery\/([^/]+?)\.json$/,
-      params: (m) => ({ name: d(m[1]) }),
-      load: () => Promise.resolve().then(function() {
-        return _name__json;
-      })
-    }
-  ]
-};
-var get_hooks = (hooks) => ({
-  getSession: hooks.getSession || (() => ({})),
-  handle: hooks.handle || (({ request, resolve: resolve2 }) => resolve2(request)),
-  handleError: hooks.handleError || (({ error: error2 }) => console.error(error2.stack)),
-  externalFetch: hooks.externalFetch || fetch
-});
-var module_lookup = {
-  "src/routes/__layout.svelte": () => Promise.resolve().then(function() {
-    return __layout;
-  }),
-  ".svelte-kit/build/components/error.svelte": () => Promise.resolve().then(function() {
-    return error;
-  }),
-  "src/routes/index.svelte": () => Promise.resolve().then(function() {
-    return index$1;
-  }),
-  "src/routes/invitation/[lang].svelte": () => Promise.resolve().then(function() {
-    return _lang_;
-  }),
-  "src/routes/gallery/index.svelte": () => Promise.resolve().then(function() {
-    return index;
-  }),
-  "src/routes/gallery/[name].svelte": () => Promise.resolve().then(function() {
-    return _name_;
-  })
-};
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-bef6721f.js", "css": ["assets/pages/__layout.svelte-a4328ed7.css", "assets/vendor-2bedf613.css"], "js": ["pages/__layout.svelte-bef6721f.js", "chunks/vendor-3d727818.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-2cca01ab.js", "css": ["assets/vendor-2bedf613.css"], "js": ["error.svelte-2cca01ab.js", "chunks/vendor-3d727818.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-defe7b93.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/index.svelte-defe7b93.js", "chunks/vendor-3d727818.js", "chunks/End-512bb055.js"], "styles": [] }, "src/routes/invitation/[lang].svelte": { "entry": "pages/invitation/[lang].svelte-a798e61d.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/invitation/[lang].svelte-a798e61d.js", "chunks/vendor-3d727818.js", "chunks/End-512bb055.js"], "styles": [] }, "src/routes/gallery/index.svelte": { "entry": "pages/gallery/index.svelte-30968c74.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/gallery/index.svelte-30968c74.js", "chunks/vendor-3d727818.js"], "styles": [] }, "src/routes/gallery/[name].svelte": { "entry": "pages/gallery/[name].svelte-d88a55c6.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/gallery/[name].svelte-d88a55c6.js", "chunks/vendor-3d727818.js"], "styles": [] } };
-async function load_component(file) {
-  const { entry, css: css2, js, styles } = metadata_lookup[file];
-  return {
-    module: await module_lookup[file](),
-    entry: assets + "/_app/" + entry,
-    css: css2.map((dep) => assets + "/_app/" + dep),
-    js: js.map((dep) => assets + "/_app/" + dep),
-    styles
-  };
-}
-function render(request, {
-  prerender
-} = {}) {
-  const host = request.headers["host"];
-  return respond({ ...request, host }, options, { prerender });
-}
-var invitation = [
-  {
-    lang: "english",
-    title: "spanish of denise and sawyer are getting married",
-    cards: [
-      {
-        text: [
-          "Hi!",
-          "It's Sawyer & Denise.",
-          "We have news!"
-        ]
-      },
-      {
-        text: [
-          "We're getting married!"
-        ],
-        special: [
-          "confetti"
-        ]
-      },
-      {
-        text: [
-          "At this point, you know if you're invited to the (very small!) ceremony."
-        ]
-      },
-      {
-        text: [
-          "October 31, 2021",
-          "5:30 p.m. to 6:30 p.m.",
-          "Sekrit Theater, Austin, TX"
-        ],
-        special: [
-          "sekrit-theater"
-        ]
-      },
-      {
-        text: [
-          "But!",
-          "There will be a small afterparty at an Airbnb.",
-          "You are invited.",
-          "Costumes encouraged!"
-        ],
-        special: [
-          "airbnb"
-        ]
-      },
-      {
-        special: [
-          "end"
-        ]
-      }
-    ]
-  },
-  {
-    lang: "espanol",
-    title: "spanish of denise and sawyer are getting married",
-    cards: [
-      {
-        text: [
-          "Hola!",
-          "It's Sawyer & Denise.",
-          "We have news!"
-        ]
-      },
-      {
-        text: [
-          "We're getting married!"
-        ],
-        special: [
-          "confetti"
-        ]
-      },
-      {
-        text: [
-          "At this point, you know if you're invited to the (very small!) ceremony."
-        ]
-      },
-      {
-        text: [
-          "October 31, 2021",
-          "5:30 p.m. to 6:30 p.m.",
-          "Sekrit Theater, Austin, TX"
-        ],
-        special: [
-          "sekrit-theater"
-        ]
-      },
-      {
-        text: [
-          "But!",
-          "There will be a small afterparty at an Airbnb.",
-          "You are invited.",
-          "Costumes encouraged!"
-        ],
-        special: [
-          "airbnb"
-        ]
-      },
-      {
-        special: [
-          "end"
-        ]
-      }
-    ]
-  }
-];
-var get = async ({ params }) => {
-  const { lang } = params;
-  const match = invitation.find((d2) => d2.lang === lang);
-  let otherLangs = invitation.filter((d2) => d2.lang !== lang).map((d2) => d2.lang);
-  const body = { match, otherLangs };
-  return { body };
-};
-var _lang__json = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  get
-});
-var _name__json = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module"
-});
-var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<main class="${"h-full w-full min-h-screen bg-gradient-to-b from-gray-50 to-gray-100"}">${slots.default ? slots.default({}) : ``}</main>`;
-});
-var __layout = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": _layout
-});
-function load$1({ error: error2, status }) {
-  return { props: { error: error2, status } };
-}
-var Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { status } = $$props;
-  let { error: error2 } = $$props;
-  if ($$props.status === void 0 && $$bindings.status && status !== void 0)
-    $$bindings.status(status);
-  if ($$props.error === void 0 && $$bindings.error && error2 !== void 0)
-    $$bindings.error(error2);
-  return `<h1>${escape(status)}</h1>
-
-<pre>${escape(error2.message)}</pre>
-
-
-
-${error2.frame ? `<pre>${escape(error2.frame)}</pre>` : ``}
-${error2.stack ? `<pre>${escape(error2.stack)}</pre>` : ``}`;
-});
-var error = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": Error$1,
-  load: load$1
-});
 var subscriber_queue = [];
+function readable(value, start) {
+  return {
+    subscribe: writable(value, start).subscribe
+  };
+}
 function writable(value, start = noop) {
   let stop;
   const subscribers = new Set();
@@ -3325,6 +3035,384 @@ function writable(value, start = noop) {
   }
   return { set, update, subscribe: subscribe2 };
 }
+readable(["en", "es"]);
+function getSession({ headers }) {
+  if (headers["accept-language"]) {
+    const acceptedLanguages = headers["accept-language"];
+    const preferredLanguage = acceptedLanguages.split(",")[0];
+    const code = preferredLanguage.split("-")[0];
+    return {
+      lang: code
+    };
+  } else
+    return {
+      lang: "en"
+    };
+}
+var user_hooks = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  getSession
+});
+var template = ({ head, body }) => `<!DOCTYPE html>
+<html lang='en' translate="yes">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<title>Denise & Sawyer are getting married!</title>
+		<meta
+			name="description"
+			content="We are getting married Halloween 2021 in Austin, Texas. You are invited to the afterparty!"
+		/>
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://married.sawyer.codes" />
+		<meta property="og:description" content="{meta.MetaDescription}" />
+		<meta property="og:title" content="Denise & Sawyer are getting married!" />
+		<meta property="og:image" content="{meta.Image}" />
+
+		<meta name="twitter:image" content="{meta.Image}" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="https://married.sawyer.codes" />
+		<meta name="twitter:title" content="Denise & Sawyer are getting married!" />
+		<meta name="twitter:description" content="{meta.MetaDescription}" />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="icon" href="/favicon.ico" />
+		` + head + '\n	</head>\n	<body>\n		<a href="#content" class="skip-to-main">Skip to main content</a>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var options = null;
+var default_settings = { paths: { "base": "", "assets": "" } };
+function init(settings = default_settings) {
+  set_paths(settings.paths);
+  set_prerendering(settings.prerendering || false);
+  const hooks = get_hooks(user_hooks);
+  options = {
+    amp: false,
+    dev: false,
+    entry: {
+      file: assets + "/_app/start-6e055e86.js",
+      css: [assets + "/_app/assets/start-e8cdb125.css", assets + "/_app/assets/vendor-2bedf613.css"],
+      js: [assets + "/_app/start-6e055e86.js", assets + "/_app/chunks/vendor-b5aa6c13.js"]
+    },
+    fetched: void 0,
+    floc: false,
+    get_component_path: (id) => assets + "/_app/" + entry_lookup[id],
+    get_stack: (error2) => String(error2),
+    handle_error: (error2, request) => {
+      hooks.handleError({ error: error2, request });
+      error2.stack = options.get_stack(error2);
+    },
+    hooks,
+    hydrate: true,
+    initiator: void 0,
+    load_component,
+    manifest,
+    paths: settings.paths,
+    prerender: true,
+    read: settings.read,
+    root: Root,
+    service_worker: null,
+    router: true,
+    ssr: true,
+    target: "#svelte",
+    template,
+    trailing_slash: "never"
+  };
+}
+var d = (s2) => s2.replace(/%23/g, "#").replace(/%3[Bb]/g, ";").replace(/%2[Cc]/g, ",").replace(/%2[Ff]/g, "/").replace(/%3[Ff]/g, "?").replace(/%3[Aa]/g, ":").replace(/%40/g, "@").replace(/%26/g, "&").replace(/%3[Dd]/g, "=").replace(/%2[Bb]/g, "+").replace(/%24/g, "$");
+var empty = () => ({});
+var manifest = {
+  assets: [{ "file": ".DS_Store", "size": 6148, "type": null }, { "file": "about.txt", "size": 378, "type": "text/plain" }, { "file": "android-chrome-192x192.png", "size": 8639, "type": "image/png" }, { "file": "android-chrome-512x512.png", "size": 28591, "type": "image/png" }, { "file": "apple-touch-icon.png", "size": 8420, "type": "image/png" }, { "file": "favicon-16x16.png", "size": 485, "type": "image/png" }, { "file": "favicon-32x32.png", "size": 935, "type": "image/png" }, { "file": "favicon.ico", "size": 15406, "type": "image/vnd.microsoft.icon" }, { "file": "fonts/.DS_Store", "size": 6148, "type": null }, { "file": "fonts/Inconsolata/.DS_Store", "size": 6148, "type": null }, { "file": "fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf", "size": 343368, "type": "font/ttf" }, { "file": "fonts/Inconsolata/OFL.txt", "size": 4443, "type": "text/plain" }, { "file": "fonts/Inconsolata/README.txt", "size": 6991, "type": "text/plain" }, { "file": "fonts/Inconsolata/static/.DS_Store", "size": 10244, "type": null }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Black.ttf", "size": 98048, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Bold.ttf", "size": 98260, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-ExtraBold.ttf", "size": 98268, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-ExtraLight.ttf", "size": 98108, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Light.ttf", "size": 97956, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Medium.ttf", "size": 98304, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-Regular.ttf", "size": 97864, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata/Inconsolata-SemiBold.ttf", "size": 98400, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Black.ttf", "size": 98408, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Bold.ttf", "size": 98300, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-ExtraBold.ttf", "size": 98328, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-ExtraLight.ttf", "size": 98128, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Light.ttf", "size": 98184, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Medium.ttf", "size": 98196, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-Regular.ttf", "size": 97916, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Condensed/Inconsolata_Condensed-SemiBold.ttf", "size": 98268, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Black.ttf", "size": 98796, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Bold.ttf", "size": 98764, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-ExtraBold.ttf", "size": 98772, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-ExtraLight.ttf", "size": 98960, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Light.ttf", "size": 98756, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Medium.ttf", "size": 98832, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-Regular.ttf", "size": 98540, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_Expanded/Inconsolata_Expanded-SemiBold.ttf", "size": 98836, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Black.ttf", "size": 98244, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Bold.ttf", "size": 98104, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-ExtraBold.ttf", "size": 98240, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-ExtraLight.ttf", "size": 98088, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Light.ttf", "size": 98048, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Medium.ttf", "size": 98052, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-Regular.ttf", "size": 97840, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraCondensed/Inconsolata_ExtraCondensed-SemiBold.ttf", "size": 98152, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Black.ttf", "size": 99280, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Bold.ttf", "size": 99188, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-ExtraBold.ttf", "size": 99252, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-ExtraLight.ttf", "size": 99444, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Light.ttf", "size": 99280, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Medium.ttf", "size": 99152, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-Regular.ttf", "size": 98980, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_ExtraExpanded/Inconsolata_ExtraExpanded-SemiBold.ttf", "size": 99244, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Black.ttf", "size": 98440, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Bold.ttf", "size": 98348, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-ExtraBold.ttf", "size": 98516, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-ExtraLight.ttf", "size": 98396, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Light.ttf", "size": 98384, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Medium.ttf", "size": 98252, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-Regular.ttf", "size": 98064, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiCondensed/Inconsolata_SemiCondensed-SemiBold.ttf", "size": 98456, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Black.ttf", "size": 98760, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Bold.ttf", "size": 98740, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-ExtraBold.ttf", "size": 98828, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-ExtraLight.ttf", "size": 98736, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Light.ttf", "size": 98476, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Medium.ttf", "size": 98636, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-Regular.ttf", "size": 98292, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_SemiExpanded/Inconsolata_SemiExpanded-SemiBold.ttf", "size": 98740, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Black.ttf", "size": 97848, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Bold.ttf", "size": 97800, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-ExtraBold.ttf", "size": 97848, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-ExtraLight.ttf", "size": 97944, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Light.ttf", "size": 97840, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Medium.ttf", "size": 97832, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-Regular.ttf", "size": 97768, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraCondensed/Inconsolata_UltraCondensed-SemiBold.ttf", "size": 97848, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Black.ttf", "size": 99436, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Bold.ttf", "size": 99444, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-ExtraBold.ttf", "size": 99484, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-ExtraLight.ttf", "size": 99664, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Light.ttf", "size": 99576, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Medium.ttf", "size": 99500, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-Regular.ttf", "size": 99428, "type": "font/ttf" }, { "file": "fonts/Inconsolata/static/Inconsolata_UltraExpanded/Inconsolata_UltraExpanded-SemiBold.ttf", "size": 99504, "type": "font/ttf" }, { "file": "fonts/RecoletaRegular/font.woff", "size": 52235, "type": "font/woff" }, { "file": "fonts/RecoletaRegular/font.woff2", "size": 49244, "type": "font/woff2" }, { "file": "site.webmanifest", "size": 305, "type": "application/manifest+json" }],
+  layout: "src/routes/__layout.svelte",
+  error: "src/routes/__error.svelte",
+  routes: [
+    {
+      type: "page",
+      pattern: /^\/$/,
+      params: empty,
+      a: ["src/routes/__layout.svelte", "src/routes/index.svelte"],
+      b: ["src/routes/__error.svelte"]
+    },
+    {
+      type: "endpoint",
+      pattern: /^\/api\/invitation\/([^/]+?)\.json$/,
+      params: (m) => ({ lang: d(m[1]) }),
+      load: () => Promise.resolve().then(function() {
+        return _lang__json;
+      })
+    },
+    {
+      type: "endpoint",
+      pattern: /^\/api\/gallery\/([^/]+?)\.json$/,
+      params: (m) => ({ name: d(m[1]) }),
+      load: () => Promise.resolve().then(function() {
+        return _name__json;
+      })
+    },
+    {
+      type: "page",
+      pattern: /^\/([^/]+?)\/?$/,
+      params: (m) => ({ lang: d(m[1]) }),
+      a: ["src/routes/__layout.svelte", "src/routes/[lang]/index.svelte"],
+      b: ["src/routes/__error.svelte"]
+    },
+    {
+      type: "page",
+      pattern: /^\/([^/]+?)\/invitation\/?$/,
+      params: (m) => ({ lang: d(m[1]) }),
+      a: ["src/routes/__layout.svelte", "src/routes/[lang]/invitation.svelte"],
+      b: ["src/routes/__error.svelte"]
+    },
+    {
+      type: "page",
+      pattern: /^\/([^/]+?)\/gallery\/?$/,
+      params: (m) => ({ lang: d(m[1]) }),
+      a: ["src/routes/__layout.svelte", "src/routes/[lang]/gallery/index.svelte"],
+      b: ["src/routes/__error.svelte"]
+    },
+    {
+      type: "page",
+      pattern: /^\/([^/]+?)\/gallery\/([^/]+?)\/?$/,
+      params: (m) => ({ lang: d(m[1]), name: d(m[2]) }),
+      a: ["src/routes/__layout.svelte", "src/routes/[lang]/gallery/[name].svelte"],
+      b: ["src/routes/__error.svelte"]
+    }
+  ]
+};
+var get_hooks = (hooks) => ({
+  getSession: hooks.getSession || (() => ({})),
+  handle: hooks.handle || (({ request, resolve: resolve2 }) => resolve2(request)),
+  handleError: hooks.handleError || (({ error: error2 }) => console.error(error2.stack)),
+  externalFetch: hooks.externalFetch || fetch
+});
+var module_lookup = {
+  "src/routes/__layout.svelte": () => Promise.resolve().then(function() {
+    return __layout;
+  }),
+  "src/routes/__error.svelte": () => Promise.resolve().then(function() {
+    return __error;
+  }),
+  "src/routes/index.svelte": () => Promise.resolve().then(function() {
+    return index$2;
+  }),
+  "src/routes/[lang]/index.svelte": () => Promise.resolve().then(function() {
+    return index$1;
+  }),
+  "src/routes/[lang]/invitation.svelte": () => Promise.resolve().then(function() {
+    return invitation;
+  }),
+  "src/routes/[lang]/gallery/index.svelte": () => Promise.resolve().then(function() {
+    return index;
+  }),
+  "src/routes/[lang]/gallery/[name].svelte": () => Promise.resolve().then(function() {
+    return _name_;
+  })
+};
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-549baf44.js", "css": ["assets/pages/__layout.svelte-bd00870d.css", "assets/vendor-2bedf613.css"], "js": ["pages/__layout.svelte-549baf44.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/__error.svelte": { "entry": "pages/__error.svelte-6a00ee3f.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/__error.svelte-6a00ee3f.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-12cef2bc.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/index.svelte-12cef2bc.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/index.svelte": { "entry": "pages/[lang]/index.svelte-97630024.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/index.svelte-97630024.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/invitation.svelte": { "entry": "pages/[lang]/invitation.svelte-60c47c7f.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/invitation.svelte-60c47c7f.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/gallery/index.svelte": { "entry": "pages/[lang]/gallery/index.svelte-50763af6.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/gallery/index.svelte-50763af6.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/gallery/[name].svelte": { "entry": "pages/[lang]/gallery/[name].svelte-1ecfde87.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/gallery/[name].svelte-1ecfde87.js", "chunks/vendor-b5aa6c13.js"], "styles": [] } };
+async function load_component(file) {
+  const { entry, css: css2, js, styles } = metadata_lookup[file];
+  return {
+    module: await module_lookup[file](),
+    entry: assets + "/_app/" + entry,
+    css: css2.map((dep) => assets + "/_app/" + dep),
+    js: js.map((dep) => assets + "/_app/" + dep),
+    styles
+  };
+}
+function render(request, {
+  prerender
+} = {}) {
+  const host = request.headers["host"];
+  return respond({ ...request, host }, options, { prerender });
+}
+var invitation$2 = {
+  title: "denise and sawyer are getting married",
+  cards: [
+    {
+      text: [
+        "Hi!",
+        "It's Sawyer & Denise.",
+        "We have news!"
+      ]
+    },
+    {
+      text: [
+        "We're getting married!"
+      ],
+      special: [
+        "confetti"
+      ]
+    },
+    {
+      text: [
+        "At this point, you know if you're invited to the (very small!) ceremony."
+      ]
+    },
+    {
+      text: [
+        "October 31, 2021",
+        "5:30 p.m. to 6:30 p.m.",
+        "Sekrit Theater, Austin, TX"
+      ],
+      special: [
+        "sekrit-theater"
+      ]
+    },
+    {
+      text: [
+        "But!",
+        "There will be a small afterparty at an Airbnb.",
+        "You are invited.",
+        "Costumes encouraged!"
+      ],
+      special: [
+        "airbnb"
+      ]
+    },
+    {
+      special: [
+        "end"
+      ]
+    }
+  ]
+};
+var en = {
+  invitation: invitation$2
+};
+var invitation$1 = {
+  title: "spanish of denise and sawyer are getting married",
+  cards: [
+    {
+      text: [
+        "Hola!",
+        "It's Sawyer & Denise.",
+        "We have news!"
+      ]
+    },
+    {
+      text: [
+        "We're getting married!"
+      ],
+      special: [
+        "confetti"
+      ]
+    },
+    {
+      text: [
+        "At this point, you know if you're invited to the (very small!) ceremony."
+      ]
+    },
+    {
+      text: [
+        "October 31, 2021",
+        "5:30 p.m. to 6:30 p.m.",
+        "Sekrit Theater, Austin, TX"
+      ],
+      special: [
+        "sekrit-theater"
+      ]
+    },
+    {
+      text: [
+        "But!",
+        "There will be a small afterparty at an Airbnb.",
+        "You are invited.",
+        "Costumes encouraged!"
+      ],
+      special: [
+        "airbnb"
+      ]
+    },
+    {
+      special: [
+        "end"
+      ]
+    }
+  ]
+};
+var es = {
+  invitation: invitation$1
+};
+var supportedLangs = {
+  en,
+  es
+};
+var keys = Object.keys(supportedLangs);
+var get = async ({ params }) => {
+  const { lang } = params;
+  const { invitation: invitation2 } = supportedLangs[lang];
+  const otherLangs = keys.filter((d2) => d2 !== lang);
+  const body = { invitation: invitation2, otherLangs };
+  return { body };
+};
+var _lang__json = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  get
+});
+var _name__json = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module"
+});
+var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<div class="${"h-full w-full min-h-screen bg-gradient-to-b from-gray-50 to-gray-100"}">${slots.default ? slots.default({}) : ``}</div>`;
+});
+var __layout = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": _layout
+});
+var _error = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<main><article class="${"p-4 "}"><h1>Whoops...</h1>
+		<h1>This page doesn&#39;t exist</h1>
+		<h1><a href="${"/"}">Go back home?</a></h1></article></main>`;
+});
+var __error = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": _error
+});
+var supportedLanguages = ["en", "es"];
+async function load$2({ session: { lang } }) {
+  console.log(lang);
+  if (supportedLanguages.includes(lang)) {
+    return {
+      status: 303,
+      redirect: `/${lang}/invitation`
+    };
+  } else
+    return {};
+}
+var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<main><article><h1>Whoops! That language isn&#39;t yet supported. Try one of the below?</h1>
+		<div class="${"mt-12"}"><a sveltekit:prefetch href="${"/en"}" class="${"my-2"}">English</a>
+			<a sveltekit:prefetch href="${"/es"}" class="${"my-2"}">Espa\xF1ol</a></div></article></main>`;
+});
+var index$2 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": Routes,
+  load: load$2
+});
+async function load$1({ page }) {
+  return {
+    status: 303,
+    redirect: `/${page.params.lang}/invitation`
+  };
+}
+var U5Blangu5D = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return ``;
+});
+var index$1 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": U5Blangu5D,
+  load: load$1
+});
 var css = {
   code: "@-webkit-keyframes svelte-genimd-cursorFade{0%,100%{opacity:1}50%{opacity:0}}@keyframes svelte-genimd-cursorFade{0%,100%{opacity:1}50%{opacity:0}}.typewriter-container.svelte-genimd>*:not(.typing):not(.finished-typing){display:none}.typewriter-container.svelte-genimd .finished-typing::after{content:none}.cursor.svelte-genimd .typing::after{content:'\u258C';display:inline-block;color:var(--cursor-color);-webkit-animation:svelte-genimd-cursorFade 1.25s infinite;animation:svelte-genimd-cursorFade 1.25s infinite}.delay.svelte-genimd{visibility:hidden}",
   map: `{"version":3,"file":"Typewriter.svelte","sources":["Typewriter.svelte"],"sourcesContent":["<script>\\n\\timport { onMount, beforeUpdate, onDestroy, createEventDispatcher } from 'svelte'\\n\\timport { typewriter } from './core/modes'\\n\\n\\texport let interval = 30\\n\\texport let cascade = false\\n\\texport let loop = false\\n\\texport let loopRandom = false\\n\\texport let scramble = false\\n\\texport let cursor = true\\n  export let delay = 0\\n\\n  let isMounted = false\\n  let reinit = {}\\n\\n  $: options = { interval, cascade, loop, loopRandom, scramble, cursor, delay, dispatch }\\n\\n  const dispatch = createEventDispatcher()\\n\\n  beforeUpdate(() => (isMounted && (reinit = {})))\\n\\n  onMount(() => (isMounted = true))\\n<\/script>\\n\\n<style>\\n\\t@-webkit-keyframes cursorFade {\\n\\t\\t0%,\\n\\t\\t100% {\\n\\t\\t\\topacity: 1;\\n\\t\\t}\\n\\n\\t\\t50% {\\n\\t\\t\\topacity: 0;\\n\\t\\t}\\n\\t}\\n\\n  @keyframes cursorFade {\\n\\t\\t0%,\\n\\t\\t100% {\\n\\t\\t\\topacity: 1;\\n\\t\\t}\\n\\n\\t\\t50% {\\n\\t\\t\\topacity: 0;\\n\\t\\t}\\n\\t}\\n\\n  .typewriter-container > :global(*:not(.typing):not(.finished-typing)) {\\n    display: none;\\n  }\\n\\n  .typewriter-container :global(.finished-typing::after) {\\n    content: none;\\n  }\\n\\n\\t.cursor :global(.typing::after) {\\n\\t\\tcontent: '\u258C';\\n\\t\\tdisplay: inline-block;\\n\\t\\tcolor: var(--cursor-color);\\n\\t\\t-webkit-animation: cursorFade 1.25s infinite;\\n\\t\\t        animation: cursorFade 1.25s infinite;\\n\\t}\\n\\n\\t.delay {\\n\\t\\tvisibility: hidden;\\n\\t}</style>\\n\\n{#key reinit}\\n  <div\\n    use:typewriter={options}\\n    class=\\"typewriter-container\\"\\n    class:cursor\\n    class:delay={options.delay > 0}\\n    style=\\"--cursor-color: {typeof cursor === 'string' ? cursor : 'black'}\\"\\n  >\\n    <slot />\\n  </div>\\n{/key}\\n"],"names":[],"mappings":"AAyBC,mBAAmB,wBAAW,CAAC,AAC9B,EAAE,CACF,IAAI,AAAC,CAAC,AACL,OAAO,CAAE,CAAC,AACX,CAAC,AAED,GAAG,AAAC,CAAC,AACJ,OAAO,CAAE,CAAC,AACX,CAAC,AACF,CAAC,AAEA,WAAW,wBAAW,CAAC,AACvB,EAAE,CACF,IAAI,AAAC,CAAC,AACL,OAAO,CAAE,CAAC,AACX,CAAC,AAED,GAAG,AAAC,CAAC,AACJ,OAAO,CAAE,CAAC,AACX,CAAC,AACF,CAAC,AAEA,mCAAqB,CAAW,oCAAoC,AAAE,CAAC,AACrE,OAAO,CAAE,IAAI,AACf,CAAC,AAED,mCAAqB,CAAC,AAAQ,uBAAuB,AAAE,CAAC,AACtD,OAAO,CAAE,IAAI,AACf,CAAC,AAEF,qBAAO,CAAC,AAAQ,cAAc,AAAE,CAAC,AAChC,OAAO,CAAE,GAAG,CACZ,OAAO,CAAE,YAAY,CACrB,KAAK,CAAE,IAAI,cAAc,CAAC,CAC1B,iBAAiB,CAAE,wBAAU,CAAC,KAAK,CAAC,QAAQ,CACpC,SAAS,CAAE,wBAAU,CAAC,KAAK,CAAC,QAAQ,AAC7C,CAAC,AAED,MAAM,cAAC,CAAC,AACP,UAAU,CAAE,MAAM,AACnB,CAAC"}`
@@ -3398,14 +3486,14 @@ function get_interpolator(a, b) {
       const delta = b - a;
       return (t) => new Date(a + t * delta);
     }
-    const keys = Object.keys(b);
+    const keys2 = Object.keys(b);
     const interpolators = {};
-    keys.forEach((key) => {
+    keys2.forEach((key) => {
       interpolators[key] = get_interpolator(a[key], b[key]);
     });
     return (t) => {
       const result = {};
-      keys.forEach((key) => {
+      keys2.forEach((key) => {
         result[key] = interpolators[key](t);
       });
       return result;
@@ -3527,70 +3615,22 @@ var End = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 	<section class="${"mt-14"}"><h1>Afterparty</h1>
 		${validate_component(Airbnb, "Airbnb").$$render($$result, {}, {}, {})}</section></article>`;
 });
-var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let activeCard;
-  let mounted;
-  let $step, $$unsubscribe_step;
-  const match = invitation[0], lang = "english", otherLangs = ["espanol"];
-  const { cards } = match;
-  let step = writable(0);
-  $$unsubscribe_step = subscribe(step, (value) => $step = value);
-  setContext("step", step);
-  const specials = new Map([
-    ["confetti", Confetti],
-    ["sekrit-theater", SekritTheater],
-    ["airbnb", Airbnb],
-    ["end", End]
-  ]);
-  const config = {
-    delay: 600,
-    length: cards.length - 1,
-    cards
-  };
-  setContext("stuff", config);
-  activeCard = cards[$step];
-  mounted = false;
-  $$unsubscribe_step();
-  return `${$$result.head += `${$$result.title = `<title>${escape(match.title)}</title>`, ""}<meta property="${"og:url"}" content="${"https://married.sawyer.codes/invitation/" + escape(lang)}" data-svelte="svelte-1p8m2kk">`, ""}
-
-${mounted ? `<div class="${"flex items-center justify-center h-full w-full min-h-screen text-center"}">${activeCard.special ? `${each(activeCard.special, (special) => `${validate_component(specials.get(special) || missing_component, "svelte:component").$$render($$result, {}, {}, {})}`)}` : ``}
-
-		${validate_component(Progress, "Progress").$$render($$result, {}, {}, {})}
-
-		${each(otherLangs, (otherLang) => `<a sveltekit:prefetch href="${"/invitation/" + escape(otherLang)}" class="${"z-50 absolute top-2 left-2 leading-none text-md font-mono transition hover:text-purple-700 hover:underline"}">${escape(otherLang)}</a>`)}
-
-		${activeCard.text ? `<article class="${"p-4 "}">${validate_component(Typewriter, "Typewriter").$$render($$result, {
-    interval: 85,
-    cascade: true,
-    cursor: false,
-    delay: $step ? config.delay : 0
-  }, {}, {
-    default: () => `${each(activeCard.text, (line) => `<h1><!-- HTML_TAG_START -->${line}<!-- HTML_TAG_END --></h1>`)}`
-  })}</article>` : ``}</div>
-
-	<section class="${"absolute w-full flex justify-between bottom-2 text-4xl px-4 "}"><button${add_attribute("aria-hidden", $step === 0, 0)}${add_classes([$step === 0 ? "invisible" : ""].join(" ").trim())}>\u{1F448}</button>
-		<button${add_attribute("aria-hidden", $step === config.length, 0)}${add_classes([$step === config.length ? "invisible" : ""].join(" ").trim())}>\u{1F449}</button></section>` : ``}`;
-});
-var index$1 = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": Routes
-});
 async function load({ page, fetch: fetch2 }) {
   const { lang } = page.params;
   const url = `/api/invitation/${lang}.json`;
   const res = await fetch2(url);
   if (res.ok) {
-    const { match, otherLangs } = await res.json();
-    return { props: { lang, match, otherLangs } };
+    const { invitation: { cards, title }, otherLangs } = await res.json();
+    return {
+      props: { lang, cards, title, otherLangs }
+    };
   }
 }
-var U5Blangu5D = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+var Invitation = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let activeCard;
   let mounted;
   let $step, $$unsubscribe_step;
-  let { match, lang, otherLangs } = $$props;
-  const { cards } = match;
+  let { cards, title, lang, otherLangs } = $$props;
   let step = writable(0);
   $$unsubscribe_step = subscribe(step, (value) => $step = value);
   setContext("step", step);
@@ -3606,8 +3646,10 @@ var U5Blangu5D = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     cards
   };
   setContext("stuff", config);
-  if ($$props.match === void 0 && $$bindings.match && match !== void 0)
-    $$bindings.match(match);
+  if ($$props.cards === void 0 && $$bindings.cards && cards !== void 0)
+    $$bindings.cards(cards);
+  if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+    $$bindings.title(title);
   if ($$props.lang === void 0 && $$bindings.lang && lang !== void 0)
     $$bindings.lang(lang);
   if ($$props.otherLangs === void 0 && $$bindings.otherLangs && otherLangs !== void 0)
@@ -3615,13 +3657,13 @@ var U5Blangu5D = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   activeCard = cards[$step];
   mounted = false;
   $$unsubscribe_step();
-  return `${$$result.head += `${$$result.title = `<title>${escape(match.title)}</title>`, ""}<meta property="${"og:url"}" content="${"https://married.sawyer.codes/invitation/" + escape(lang)}" data-svelte="svelte-1p8m2kk">`, ""}
+  return `${$$result.head += `${$$result.title = `<title>${escape(title)}</title>`, ""}<meta property="${"og:url"}" content="${"https://married.sawyer.codes/invitation/" + escape(lang)}" data-svelte="svelte-tl3">`, ""}
 
-${mounted ? `<div class="${"flex items-center justify-center h-full w-full min-h-screen text-center"}">${activeCard.special ? `${each(activeCard.special, (special) => `${validate_component(specials.get(special) || missing_component, "svelte:component").$$render($$result, {}, {}, {})}`)}` : ``}
+${mounted ? `<main class="${"flex items-center justify-center h-full w-full min-h-screen text-center"}">${activeCard.special ? `${each(activeCard.special, (special) => `${validate_component(specials.get(special) || missing_component, "svelte:component").$$render($$result, {}, {}, {})}`)}` : ``}
 
 		${validate_component(Progress, "Progress").$$render($$result, {}, {}, {})}
 
-		${each(otherLangs, (otherLang) => `<a sveltekit:prefetch href="${"/invitation/" + escape(otherLang)}" class="${"z-50 absolute top-2 left-2 leading-none text-md font-mono transition hover:text-purple-700 hover:underline"}">${escape(otherLang)}</a>`)}
+		${each(otherLangs, (otherLang) => `<a sveltekit:prefetch href="${"/" + escape(otherLang) + "/invitation"}" class="${"z-50 absolute top-2 left-2 leading-none text-lg font-mono transition p-0 m-0 bg-transparent border-none hover:text-purple-700 hover:underline hover:bg-transparent"}">${escape(otherLang)}</a>`)}
 
 		${activeCard.text ? `<article class="${"p-4 "}">${validate_component(Typewriter, "Typewriter").$$render($$result, {
     interval: 85,
@@ -3630,19 +3672,19 @@ ${mounted ? `<div class="${"flex items-center justify-center h-full w-full min-h
     delay: $step ? config.delay : 0
   }, {}, {
     default: () => `${each(activeCard.text, (line) => `<h1><!-- HTML_TAG_START -->${line}<!-- HTML_TAG_END --></h1>`)}`
-  })}</article>` : ``}</div>
+  })}</article>` : ``}
 
-	<section class="${"absolute w-full flex justify-between bottom-2 text-4xl px-4 "}"><button${add_attribute("aria-hidden", $step === 0, 0)}${add_classes([$step === 0 ? "invisible" : ""].join(" ").trim())}>\u{1F448}</button>
-		<button${add_attribute("aria-hidden", $step === config.length, 0)}${add_classes([$step === config.length ? "invisible" : ""].join(" ").trim())}>\u{1F449}</button></section>` : ``}`;
+		<section class="${"absolute w-full flex justify-between bottom-2 text-4xl px-4 "}"><button${add_attribute("aria-hidden", $step === 0, 0)}${add_classes([$step === 0 ? "invisible" : ""].join(" ").trim())}>\u{1F448}</button>
+			<button${add_attribute("aria-hidden", $step === config.length, 0)}${add_classes([$step === config.length ? "invisible" : ""].join(" ").trim())}>\u{1F449}</button></section></main>` : ``}`;
 });
-var _lang_ = /* @__PURE__ */ Object.freeze({
+var invitation = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  "default": U5Blangu5D,
+  "default": Invitation,
   load
 });
 var Gallery = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<h1>gallery</h1>`;
+  return `<main><h1>Gallery</h1></main>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,

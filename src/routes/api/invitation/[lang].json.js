@@ -1,10 +1,15 @@
-import invitation from '$data/invitation.json';
+import en from '$locales/en.json';
+import es from '$locales/es.json';
+const supportedLangs = {
+	en: en,
+	es: es
+};
+const keys = Object.keys(supportedLangs);
 
 export const get = async ({ params }) => {
 	const { lang } = params;
-	const match = invitation.find((d) => d.lang === lang);
-
-	let otherLangs = invitation.filter((d) => d.lang !== lang).map(d => d.lang)
-	const body = { match, otherLangs };
+	const { invitation } = supportedLangs[lang];
+	const otherLangs = keys.filter((d) => d !== lang);
+	const body = { invitation, otherLangs };
 	return { body };
 };

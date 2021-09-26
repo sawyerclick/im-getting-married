@@ -4,9 +4,12 @@
 		const url = `/api/invitation/${lang}.json`;
 		const res = await fetch(url);
 		if (res.ok) {
-			const { match, otherLangs } = await res.json();
+			const {
+				invitation: { cards, title },
+				otherLangs
+			} = await res.json();
 			return {
-				props: { lang, match, otherLangs }
+				props: { lang, cards, title, otherLangs }
 			};
 		}
 	}
@@ -21,8 +24,7 @@
 	import Airbnb from '$lib/Airbnb.svelte';
 	import Confetti from '$lib/Confetti.svelte';
 	import End from '$lib/End.svelte';
-	export let match, lang, otherLangs;
-	const { cards } = match;
+	export let cards, title, lang, otherLangs;
 
 	let step = writable(0);
 	setContext('step', step);
@@ -51,12 +53,12 @@
 </script>
 
 <svelte:head>
-	<title>{match.title}</title>
+	<title>{title}</title>
 	<meta property="og:url" content="https://married.sawyer.codes/invitation/{lang}" />
 </svelte:head>
 
 {#if mounted}
-	<div class="flex items-center justify-center h-full w-full min-h-screen text-center">
+	<main class="flex items-center justify-center h-full w-full min-h-screen text-center">
 		{#if activeCard.special}
 			{#each activeCard.special as special}
 				<svelte:component this={specials.get(special)} />
@@ -68,8 +70,8 @@
 		{#each otherLangs as otherLang}
 			<a
 				sveltekit:prefetch
-				href="/invitation/{otherLang}"
-				class="z-50 absolute top-2 left-2 leading-none text-md font-mono transition hover:text-purple-700 hover:underline"
+				href="/{otherLang}/invitation"
+				class="z-50 absolute top-2 left-2 leading-none text-lg font-mono transition p-0 m-0 bg-transparent border-none hover:text-purple-700 hover:underline hover:bg-transparent"
 			>
 				{otherLang}</a
 			>
@@ -84,18 +86,18 @@
 				</Typewriter>
 			</article>
 		{/if}
-	</div>
 
-	<section class="absolute w-full flex justify-between bottom-2 text-4xl px-4 ">
-		<button
-			on:click={() => ($step = $step - 1)}
-			class:invisible={$step === 0}
-			aria-hidden={$step === 0}>👈</button
-		>
-		<button
-			on:click={() => ($step = $step + 1)}
-			class:invisible={$step === config.length}
-			aria-hidden={$step === config.length}>👉</button
-		>
-	</section>
+		<section class="absolute w-full flex justify-between bottom-2 text-4xl px-4 ">
+			<button
+				on:click={() => ($step = $step - 1)}
+				class:invisible={$step === 0}
+				aria-hidden={$step === 0}>👈</button
+			>
+			<button
+				on:click={() => ($step = $step + 1)}
+				class:invisible={$step === config.length}
+				aria-hidden={$step === config.length}>👉</button
+			>
+		</section>
+	</main>
 {/if}

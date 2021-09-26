@@ -19,7 +19,7 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
-					'$data': path.resolve("./src/data"),
+					'$locales': path.resolve("./src/locales"),
 					"$stores": path.resolve('./src/stores.js'),
 					'$utils': path.resolve('./src/utils'),
 					'$api': path.resolve('./src/routes/api')
