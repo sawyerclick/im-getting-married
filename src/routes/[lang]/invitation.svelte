@@ -45,21 +45,30 @@
 
 	onMount(() => {
 		mounted = true;
+		clearTimeout(timer);
 		$step = 0;
 	});
 
 	let timer;
 	const advanceCard = () => {
+		clearTimeout(timer);
 		if ($step < config.length) {
-			clearTimeout(timer);
 			timer = setTimeout(() => {
 				$step = $step + 1;
 			}, 1000);
 		}
 	};
 
+	const resetCard = () => {
+		clearTimeout(timer);
+		$step = 0;
+	};
+
 	$: activeCard = cards[$step];
 	$: mounted = false;
+
+	// reset vars on lang change
+	$: lang, resetCard;
 </script>
 
 <svelte:head>
@@ -79,16 +88,15 @@
 
 		{#each otherLangs as otherLang}
 			<a
-				sveltekit:prefetch
 				href="/{otherLang}/invitation"
-				class="z-50 absolute top-2 left-2 leading-none text-lg font-mono transition p-0 m-0 bg-transparent border-none hover:text-purple-700 hover:underline hover:bg-transparent"
+				class="z-50 absolute top-3 left-2 leading-none text-lg font-mono transition p-0 m-0 bg-transparent border-none hover:text-purple-700 hover:underline hover:bg-transparent"
 			>
 				{otherLang}</a
 			>
 		{/each}
 
 		{#if activeCard.text}
-			<article class="p-4 ">
+			<article class="p-6 mb-8">
 				<Typewriter
 					interval={85}
 					cascade
