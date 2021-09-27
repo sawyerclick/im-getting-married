@@ -18,6 +18,7 @@
 <script>
 	import { setContext, onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { timer } from '$stores';
 	import Typewriter from 'svelte-typewriter';
 	import Progress from '$lib/Progress.svelte';
 	import SekritTheater from '$lib/SekritTheater.svelte';
@@ -45,9 +46,9 @@
 
 	const advanceCard = () => {
 		if ($step < config.length) {
-			timer = setTimeout(() => {
+			$timer = setTimeout(() => {
 				$step = $step + 1;
-				clearTimeout(timer);
+				clearTimeout($timer);
 			}, 1000);
 		}
 	};
@@ -55,7 +56,6 @@
 	const mount = () => (mounted = true);
 	onMount(mount);
 
-	$: timer = null;
 	$: activeCard = cards[$step];
 	$: mounted = false;
 
@@ -63,7 +63,8 @@
 	const reset = () => {
 		$step = 0;
 		activeCard = cards[0];
-		clearTimeout(timer);
+		clearTimeout($timer);
+		$timer = null;
 	};
 	$: lang, reset();
 </script>
