@@ -17,7 +17,7 @@
 </script>
 
 <script>
-	import { setContext, onMount, onDestroy } from 'svelte';
+	import { setContext, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	import Typewriter from 'svelte-typewriter';
