@@ -2807,6 +2807,10 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function set_store_value(store, ret, value) {
+  store.set(value);
+  return ret;
+}
 var is_client = typeof window !== "undefined";
 var now = is_client ? () => window.performance.now() : () => Date.now();
 var raf = is_client ? (cb) => requestAnimationFrame(cb) : noop;
@@ -2847,6 +2851,9 @@ function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
+}
+function onDestroy(fn) {
+  get_current_component().$$.on_destroy.push(fn);
 }
 function createEventDispatcher() {
   const component = get_current_component();
@@ -2934,9 +2941,6 @@ function add_attribute(name, value, boolean) {
   if (value == null || boolean && !value)
     return "";
   return ` ${name}${value === true ? "" : `=${typeof value === "string" ? JSON.stringify(escape(value)) : `"${value}"`}`}`;
-}
-function add_classes(classes) {
-  return classes ? ` class="${classes}"` : "";
 }
 function afterUpdate() {
 }
@@ -3035,7 +3039,10 @@ function writable(value, start = noop) {
   }
   return { set, update, subscribe: subscribe2 };
 }
-readable(["en", "es"]);
+var supportedLanguages$1 = readable({
+  en: { name: "english", flag: "\u{1F1EC}\u{1F1E7}" },
+  es: { name: "espa\xF1ol", flag: "\u{1F1F8}\u{1F1FB}" }
+});
 function getSession({ headers }) {
   if (headers["accept-language"]) {
     const acceptedLanguages = headers["accept-language"];
@@ -3094,9 +3101,9 @@ function init(settings = default_settings) {
     amp: false,
     dev: false,
     entry: {
-      file: assets + "/_app/start-6e055e86.js",
+      file: assets + "/_app/start-98440e09.js",
       css: [assets + "/_app/assets/start-e8cdb125.css", assets + "/_app/assets/vendor-2bedf613.css"],
-      js: [assets + "/_app/start-6e055e86.js", assets + "/_app/chunks/vendor-b5aa6c13.js"]
+      js: [assets + "/_app/start-98440e09.js", assets + "/_app/chunks/vendor-a50c4f2f.js"]
     },
     fetched: void 0,
     floc: false,
@@ -3212,7 +3219,7 @@ var module_lookup = {
     return _name_;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-549baf44.js", "css": ["assets/pages/__layout.svelte-bd00870d.css", "assets/vendor-2bedf613.css"], "js": ["pages/__layout.svelte-549baf44.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/__error.svelte": { "entry": "pages/__error.svelte-6a00ee3f.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/__error.svelte-6a00ee3f.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-12cef2bc.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/index.svelte-12cef2bc.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/index.svelte": { "entry": "pages/[lang]/index.svelte-97630024.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/index.svelte-97630024.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/invitation.svelte": { "entry": "pages/[lang]/invitation.svelte-60c47c7f.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/invitation.svelte-60c47c7f.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/gallery/index.svelte": { "entry": "pages/[lang]/gallery/index.svelte-50763af6.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/gallery/index.svelte-50763af6.js", "chunks/vendor-b5aa6c13.js"], "styles": [] }, "src/routes/[lang]/gallery/[name].svelte": { "entry": "pages/[lang]/gallery/[name].svelte-1ecfde87.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/gallery/[name].svelte-1ecfde87.js", "chunks/vendor-b5aa6c13.js"], "styles": [] } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-6d5496b9.js", "css": ["assets/pages/__layout.svelte-2d63c7e2.css", "assets/vendor-2bedf613.css"], "js": ["pages/__layout.svelte-6d5496b9.js", "chunks/vendor-a50c4f2f.js"], "styles": [] }, "src/routes/__error.svelte": { "entry": "pages/__error.svelte-0e82740b.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/__error.svelte-0e82740b.js", "chunks/vendor-a50c4f2f.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-b2e74030.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/index.svelte-b2e74030.js", "chunks/vendor-a50c4f2f.js"], "styles": [] }, "src/routes/[lang]/index.svelte": { "entry": "pages/[lang]/index.svelte-70ddcc5d.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/index.svelte-70ddcc5d.js", "chunks/vendor-a50c4f2f.js"], "styles": [] }, "src/routes/[lang]/invitation.svelte": { "entry": "pages/[lang]/invitation.svelte-c2dfaf49.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/invitation.svelte-c2dfaf49.js", "chunks/vendor-a50c4f2f.js"], "styles": [] }, "src/routes/[lang]/gallery/index.svelte": { "entry": "pages/[lang]/gallery/index.svelte-0fb45497.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/gallery/index.svelte-0fb45497.js", "chunks/vendor-a50c4f2f.js"], "styles": [] }, "src/routes/[lang]/gallery/[name].svelte": { "entry": "pages/[lang]/gallery/[name].svelte-d74992b7.js", "css": ["assets/vendor-2bedf613.css"], "js": ["pages/[lang]/gallery/[name].svelte-d74992b7.js", "chunks/vendor-a50c4f2f.js"], "styles": [] } };
 async function load_component(file) {
   const { entry, css: css2, js, styles } = metadata_lookup[file];
   return {
@@ -3284,18 +3291,18 @@ var en = {
   invitation: invitation$2
 };
 var invitation$1 = {
-  title: "spanish of denise and sawyer are getting married",
+  title: "\xA1Denise y Sawyer se van a casar!",
   cards: [
     {
       text: [
-        "Hola!",
-        "It's Sawyer & Denise.",
-        "We have news!"
+        "\xA1Hola!",
+        "Es Sawyer & Denise.",
+        "\xA1Tenemos noticias!"
       ]
     },
     {
       text: [
-        "We're getting married!"
+        "\xA1Nos vamos a casar!"
       ],
       special: [
         "confetti"
@@ -3303,13 +3310,13 @@ var invitation$1 = {
     },
     {
       text: [
-        "At this point, you know if you're invited to the (very small!) ceremony."
+        "Ya sabes si est\xE1s invitado a la ceremonia."
       ]
     },
     {
       text: [
-        "October 31, 2021",
-        "5:30 p.m. to 6:30 p.m.",
+        "Octubre 31, 2021",
+        "5:30 p.m. - 6:30 p.m.",
         "Sekrit Theater, Austin, TX"
       ],
       special: [
@@ -3318,10 +3325,8 @@ var invitation$1 = {
     },
     {
       text: [
-        "But!",
-        "There will be a small afterparty at an Airbnb.",
-        "You are invited.",
-        "Costumes encouraged!"
+        "Va a ver una peque\xF1a fiesta en un Airbnb.",
+        "Est\xE1s invitado."
       ],
       special: [
         "airbnb"
@@ -3572,9 +3577,9 @@ var Progress = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   pct = $progress / length * 100;
   $$unsubscribe_progress();
   $$unsubscribe_step();
-  return `<div class="${"fixed top-0 left-0 w-full h-1"}"><div class="${"w-full h-full bg-gray-200 absolute"}" aria-hidden></div>
+  return `<div class="${"fixed top-0 left-0 w-full h-2"}"><div class="${"w-full h-full bg-gray-200 absolute"}" aria-hidden></div>
 	<div class="${"h-full bg-purple-700 absolute"}" style="${"width:" + escape(pct) + "%"}" aria-hidden></div>
-	<p class="${"z-50 absolute top-2 right-2 leading-none text-md"}">card ${escape($step)} of ${escape(length)}</p></div>`;
+	<p class="${"z-50 absolute top-3 right-2 leading-none text-md"}">card ${escape($step)} of ${escape(length)}</p></div>`;
 });
 var PopUp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $step, $$unsubscribe_step;
@@ -3588,7 +3593,7 @@ var PopUp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.text(text);
   $$unsubscribe_step();
   return `<a class="${[
-    "bottom-10 block px-6 py-4 mt-4 leading-none rounded-lg text-xl font-serif uppercase w-auto transition hover:-translate-y-2 hover:shadow-lg hover:scale-110",
+    "bottom-10 block p-4 mt-4 leading-none border-none text-center rounded-lg text-xl font-serif uppercase w-auto bg-transparent transition mx-0 hover:-translate-y-2 hover:shadow-lg hover:scale-110 hover:bg-transparent hover:text-black",
     $step != length ? "fixed" : ""
   ].join(" ").trim()}"${add_attribute("href", link, 0)} target="${"_blank"}">${escape(text)}</a>`;
 });
@@ -3619,10 +3624,11 @@ async function load({ page, fetch: fetch2 }) {
   const { lang } = page.params;
   const url = `/api/invitation/${lang}.json`;
   const res = await fetch2(url);
+  let timers = [];
   if (res.ok) {
     const { invitation: { cards, title }, otherLangs } = await res.json();
     return {
-      props: { lang, cards, title, otherLangs }
+      props: { lang, cards, title, otherLangs, timers }
     };
   }
 }
@@ -3630,7 +3636,9 @@ var Invitation = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   let activeCard;
   let mounted;
   let $step, $$unsubscribe_step;
-  let { cards, title, lang, otherLangs } = $$props;
+  let $supportedLanguages, $$unsubscribe_supportedLanguages;
+  $$unsubscribe_supportedLanguages = subscribe(supportedLanguages$1, (value) => $supportedLanguages = value);
+  let { cards, otherLangs, title, lang, timers } = $$props;
   let step = writable(0);
   $$unsubscribe_step = subscribe(step, (value) => $step = value);
   setContext("step", step);
@@ -3646,36 +3654,48 @@ var Invitation = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     cards
   };
   setContext("stuff", config);
+  const reset = () => {
+    console.log("-", timers);
+    for (let timer in timers)
+      clearTimeout(timer);
+    console.log("+", timers);
+    set_store_value(step, $step = 0, $step);
+    activeCard = cards[0];
+  };
+  onDestroy(reset);
   if ($$props.cards === void 0 && $$bindings.cards && cards !== void 0)
     $$bindings.cards(cards);
+  if ($$props.otherLangs === void 0 && $$bindings.otherLangs && otherLangs !== void 0)
+    $$bindings.otherLangs(otherLangs);
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
   if ($$props.lang === void 0 && $$bindings.lang && lang !== void 0)
     $$bindings.lang(lang);
-  if ($$props.otherLangs === void 0 && $$bindings.otherLangs && otherLangs !== void 0)
-    $$bindings.otherLangs(otherLangs);
+  if ($$props.timers === void 0 && $$bindings.timers && timers !== void 0)
+    $$bindings.timers(timers);
   activeCard = cards[$step];
   mounted = false;
+  {
+    reset();
+  }
   $$unsubscribe_step();
-  return `${$$result.head += `${$$result.title = `<title>${escape(title)}</title>`, ""}<meta property="${"og:url"}" content="${"https://married.sawyer.codes/invitation/" + escape(lang)}" data-svelte="svelte-tl3">`, ""}
+  $$unsubscribe_supportedLanguages();
+  return `${$$result.head += `${$$result.title = `<title>${escape(title)}</title>`, ""}<meta property="${"og:url"}" content="${"https://married.sawyer.codes/" + escape(lang) + "/invitation"}" data-svelte="svelte-xbjvd5">`, ""}
 
 ${mounted ? `<main class="${"flex items-center justify-center h-full w-full min-h-screen text-center"}">${activeCard.special ? `${each(activeCard.special, (special) => `${validate_component(specials.get(special) || missing_component, "svelte:component").$$render($$result, {}, {}, {})}`)}` : ``}
 
 		${validate_component(Progress, "Progress").$$render($$result, {}, {}, {})}
 
-		${each(otherLangs, (otherLang) => `<a sveltekit:prefetch href="${"/" + escape(otherLang) + "/invitation"}" class="${"z-50 absolute top-2 left-2 leading-none text-lg font-mono transition p-0 m-0 bg-transparent border-none hover:text-purple-700 hover:underline hover:bg-transparent"}">${escape(otherLang)}</a>`)}
+		${each(otherLangs, (otherLang) => `<a href="${"/" + escape(otherLang) + "/invitation"}" class="${"z-50 absolute top-3 left-2 leading-none text-xl font-mono align-middle transition p-0 m-0 bg-transparent border-none hover:bg-transparent hover:scale-125"}">\u{1F448}<!-- HTML_TAG_START -->${$supportedLanguages[otherLang].flag}<!-- HTML_TAG_END --></a>`)}
 
-		${activeCard.text ? `<article class="${"p-4 "}">${validate_component(Typewriter, "Typewriter").$$render($$result, {
+		${activeCard.text ? `<article class="${"p-6 mb-8"}">${validate_component(Typewriter, "Typewriter").$$render($$result, {
     interval: 85,
     cascade: true,
     cursor: false,
     delay: $step ? config.delay : 0
   }, {}, {
     default: () => `${each(activeCard.text, (line) => `<h1><!-- HTML_TAG_START -->${line}<!-- HTML_TAG_END --></h1>`)}`
-  })}</article>` : ``}
-
-		<section class="${"absolute w-full flex justify-between bottom-2 text-4xl px-4 "}"><button${add_attribute("aria-hidden", $step === 0, 0)}${add_classes([$step === 0 ? "invisible" : ""].join(" ").trim())}>\u{1F448}</button>
-			<button${add_attribute("aria-hidden", $step === config.length, 0)}${add_classes([$step === config.length ? "invisible" : ""].join(" ").trim())}>\u{1F449}</button></section></main>` : ``}`;
+  })}</article>` : ``}</main>` : ``}`;
 });
 var invitation = /* @__PURE__ */ Object.freeze({
   __proto__: null,
