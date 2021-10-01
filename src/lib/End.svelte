@@ -1,4 +1,5 @@
 <script>
+	import { getContext } from 'svelte';
 	import Airbnb from './Airbnb.svelte';
 	import SekritTheater from './SekritTheater.svelte';
 </script>

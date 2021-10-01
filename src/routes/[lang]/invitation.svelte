@@ -1,22 +1,22 @@
 <script context="module">
 	export async function load({ page, fetch }) {
 		const { lang } = page.params;
-		const url = `/api/invitation/${lang}.json`;
+		const url = `/${lang}/invitation.json`;
 		const res = await fetch(url);
-		let timer;
 		if (res.ok) {
 			const {
-				invitation: { cards, title },
+				page: { cards, title },
 				otherLangs
 			} = await res.json();
 			return {
-				props: { lang, cards, title, otherLangs, timer }
+				props: { lang, cards, title, otherLangs }
 			};
 		}
 	}
 </script>
 
 <script>
+	import delay from 'lodash.delay';
 	import { setContext, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -27,9 +27,11 @@
 	import Confetti from '$lib/Confetti.svelte';
 	import End from '$lib/End.svelte';
 
-	import { supportedLanguages } from '$stores';
+	import { supportedLanguages, t } from '$stores';
 
-	export let cards, otherLangs, title, lang, timer;
+	export let cards, otherLangs, title, lang;
+
+	$: promise = null;
 
 	// write reactive context to pass props down deep
 	let step = writable(0);
@@ -49,33 +51,32 @@
 	};
 	setContext('stuff', config);
 
-	const advanceCard = () => {
-		if (timer) {
-			clearTimeout(timer);
-			timer = null;
-		}
-		if ($step < config.length) {
-			timer = setTimeout(() => {
+	const timer = () => {
+		new Promise((res) => {
+			setTimeout(async () => {
 				$step = $step + 1;
+				res();
 			}, 1000);
-		}
+		});
 	};
 
-	const reset = () => {
-		clearTimeout(timer);
-		$step = 0;
-		activeCard = cards[0];
+	const advanceCard = () => {
+		clearTimeout($t);
+		if ($step < config.length) timer();
 	};
 
 	const mount = () => (mounted = true);
-	onMount(() => {
-		mount();
-	});
+	onMount(mount);
+
+	const reset = () => {
+		clearTimeout($t);
+		$step = 0;
+		activeCard = cards[0];
+		console.log('reset', $t);
+	};
 
 	$: activeCard = cards[$step];
 	$: mounted = false;
-
-	// var change listener
 	$: lang, reset();
 </script>
 
@@ -103,20 +104,22 @@
 			>
 		{/each}
 
-		{#if activeCard.text}
-			<article class="p-6 mb-8">
-				<Typewriter
-					interval={85}
-					cascade
-					cursor={false}
-					delay={$step ? config.delay : 0}
-					on:done={advanceCard}
-				>
-					{#each activeCard.text as line}
-						<h1>{@html line}</h1>
-					{/each}
-				</Typewriter>
-			</article>
+		{#if activeCard.text && $step < config.length}
+			{#await promise then resolve}
+				<article class="p-6 mb-8">
+					<Typewriter
+						interval={85}
+						cascade
+						cursor={false}
+						delay={$step ? config.delay : 0}
+						on:done={advanceCard}
+					>
+						{#each activeCard.text as line}
+							<h1>{@html line}</h1>
+						{/each}
+					</Typewriter>
+				</article>
+			{/await}
 		{/if}
 	</main>
 {/if}

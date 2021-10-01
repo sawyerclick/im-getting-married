@@ -7,9 +7,9 @@ const supportedLangs = {
 const keys = Object.keys(supportedLangs);
 
 export const get = async ({ params }) => {
-	const { lang } = params;
-	const { invitation } = supportedLangs[lang];
+	const { lang, endpoint } = params;
+	const page = supportedLangs[lang][endpoint];
 	const otherLangs = keys.filter((d) => d !== lang);
-	const body = { invitation, otherLangs };
+	const body = { page, otherLangs };
 	return { body };
 };
