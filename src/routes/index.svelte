@@ -11,6 +11,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Denise & Sawyer are getting married!</title>
+</svelte:head>
+
 <main>
 	<article>
 		<h1>Whoops! That language isn't yet supported. Try one of the below?</h1>

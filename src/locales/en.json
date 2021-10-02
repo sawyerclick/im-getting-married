@@ -1,6 +1,6 @@
 {
 	"invitation": {
-		"title": "denise and sawyer are getting married",
+		"title": "Denise & Sawyer are getting married!",
 		"cards": [
 			{ "text": ["Hi!", "It's Sawyer & Denise.", "We have news!"] },
 			{ "text": ["We're getting married!"], "special": ["confetti"] },
